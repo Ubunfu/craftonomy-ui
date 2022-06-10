@@ -31,3 +31,4 @@ steps:
     env:
       BUCKET_NAME: $(BUCKET_NAME)
     displayName: 'Deploy'
+    
