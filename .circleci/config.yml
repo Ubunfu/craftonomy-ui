@@ -11,8 +11,6 @@ jobs:
     steps:
       - checkout
       - run:
-          command: echo awsregionis$AWS_DEFAULT_REGION
-      - run:
           command: npm install
       - run:
           command: npm run build
@@ -33,6 +31,7 @@ workflows:
       - deploySite:
           context:
             - craftonomy-prod
+            - mc-shop-ui
 #          filters:
 #            branches:
 #              only:
