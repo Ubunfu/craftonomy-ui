@@ -10,6 +10,8 @@ jobs:
       - image: 'cimg/node:lts'
     steps:
       - run:
+          command: npm install
+      - run:
           command: npm run build
       - aws-s3/copy:
           from: dist/
