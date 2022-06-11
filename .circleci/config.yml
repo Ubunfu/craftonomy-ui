@@ -32,7 +32,7 @@ workflows:
           context:
             - craftonomy-prod
             - mc-shop-ui
-#          filters:
-#            branches:
-#              only:
-#                - master
+          filters:
+            branches:
+              only:
+                - master
