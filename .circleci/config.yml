@@ -9,6 +9,7 @@ jobs:
     docker:
       - image: 'cimg/node:lts'
     steps:
+      - checkout
       - run:
           command: npm install
       - run:
