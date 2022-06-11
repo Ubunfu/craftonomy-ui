@@ -9,8 +9,13 @@ workflows:
     jobs:
       - node/run:
           npm-run: build
-          post-steps:
-            - aws-s3/copy:
-                from: dist/
-                to: s3://shop.craftonomy.net
-                arguments: --recursive
+      - aws-s3/copy:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - node/run
+          from: dist/
+          to: s3://shop.craftonomy.net
+          arguments: --recursive
