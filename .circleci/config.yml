@@ -1,0 +1,17 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.1
+  aws-s3: circleci/aws-s3@2.0
+
+workflows:
+  buildAndDeploy:
+    jobs:
+      - node/test:
+          version: "15.1"
+          post-steps:
+            - run: npm run build
+            - aws-s3/copy:
+                from: dist/
+                to: s3://shop.craftonomy.net
+                arguments: --recursive
