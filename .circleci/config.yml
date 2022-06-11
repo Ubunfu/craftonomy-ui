@@ -7,10 +7,9 @@ orbs:
 workflows:
   buildAndDeploy:
     jobs:
-      - node/test:
-          version: "15.1"
+      - node/run:
+          npm-run: build
           post-steps:
-            - run: npm run build
             - aws-s3/copy:
                 from: dist/
                 to: s3://shop.craftonomy.net
