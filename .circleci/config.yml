@@ -1,0 +1,38 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5.0.2
+  aws-s3: circleci/aws-s3@3.0.0
+
+jobs:
+  deploySite:
+    docker:
+      - image: 'cimg/node:lts'
+    steps:
+      - checkout
+      - run:
+          command: npm install
+      - run:
+          command: npm run build
+      - aws-s3/copy:
+          from: dist/
+          to: s3://shop.craftonomy.net
+          arguments: --recursive
+
+workflows:
+  buildAndDeploy:
+    jobs:
+      - node/run:
+          npm-run: build
+          filters:
+            branches:
+              ignore:
+                - master
+      - deploySite:
+          context:
+            - craftonomy-prod
+            - mc-shop-ui
+          filters:
+            branches:
+              only:
+                - master
