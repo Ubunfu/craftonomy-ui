@@ -9,6 +9,8 @@ jobs:
     docker:
       - image: 'cimg/node:lts'
     steps:
+      - node/run:
+          npm-run: build
       - aws-s3/copy:
           from: dist/
           to: s3://shop.craftonomy.net
@@ -19,6 +21,10 @@ workflows:
     jobs:
       - node/run:
           npm-run: build
+          filters:
+            branches:
+              ignore:
+                - master
       - deploySite:
           context:
             - craftonomy-prod
