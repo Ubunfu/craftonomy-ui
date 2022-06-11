@@ -20,7 +20,9 @@ workflows:
       - node/run:
           npm-run: build
       - deploySite:
-          filters:
-            branches:
-              only:
-                - master
+          context:
+            - craftonomy-prod
+#          filters:
+#            branches:
+#              only:
+#                - master
