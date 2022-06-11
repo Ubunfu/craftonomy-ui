@@ -11,6 +11,8 @@ jobs:
     steps:
       - checkout
       - run:
+          command: echo $AWS_DEFAULT_REGION
+      - run:
           command: npm install
       - run:
           command: npm run build
