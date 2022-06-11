@@ -11,7 +11,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: echo $AWS_DEFAULT_REGION
+          command: echo awsregionis$AWS_DEFAULT_REGION
       - run:
           command: npm install
       - run:
