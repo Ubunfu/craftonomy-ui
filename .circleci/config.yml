@@ -4,18 +4,23 @@ orbs:
   node: circleci/node@5.0.2
   aws-s3: circleci/aws-s3@3.0.0
 
+jobs:
+  deploySite:
+    docker:
+      - image: 'cimg/node:lts'
+    steps:
+      - aws-s3/copy:
+          from: dist/
+          to: s3://shop.craftonomy.net
+          arguments: --recursive
+
 workflows:
   buildAndDeploy:
     jobs:
       - node/run:
           npm-run: build
-      - aws-s3/copy:
+      - deploySite:
           filters:
             branches:
               only:
                 - master
-          requires:
-            - node/run
-          from: dist/
-          to: s3://shop.craftonomy.net
-          arguments: --recursive
