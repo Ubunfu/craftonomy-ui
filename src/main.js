@@ -1,5 +1,10 @@
 import 'dotenv/config'
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
+import router from "@/router";
+import VueCookies from 'vue-cookies'
 
-createApp(App).mount('#app')
+createApp(App)
+    .use(router)
+    .use(VueCookies)
+    .mount('#app')
