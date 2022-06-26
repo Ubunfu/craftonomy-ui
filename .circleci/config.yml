@@ -36,5 +36,5 @@ workflows:
             branches:
               only:
                 - master
-                - feature/*
-                - bugfix/*
+                - /feature\/.*/
+                - /bugfix\/.*/
