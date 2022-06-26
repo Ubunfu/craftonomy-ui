@@ -10,6 +10,10 @@ A simple web UI to show the catalog of items available within mc-shop.
 ## Configuration
 
 ### Environment Variables
-| Parameter                   | Description                                                                     | Default | Required? |
-|-----------------------------|---------------------------------------------------------------------------------|---------|-----------|
-| VUE_APP_MC_SHOP_CATALOG_URL | URL for the web service returning the mc-shop item catalog.                     | n/a     | Yes       |
+| Parameter                   | Description                                                                                                                                | Default   | Required? |
+|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|-----------|-----------|
+| VUE_APP_MC_SHOP_CATALOG_URL | URL for the web service returning the mc-shop item catalog.                                                                                | n/a       | Yes       |
+| VUE_APP_IDP_LOGIN_URI       | URL for the IDP providing authentication.                                                                                                  | n/a       | Yes       |
+| VUE_APP_IDP_TOKEN_URI       | URL for the OAuth API provided by the IDP used to exchange an auth code for tokens.                                                        | n/a       | Yes       |
+| VUE_APP_IDP_REDIRECT_URI    | URL that the IDP will use to redirect the user back to mc-shop-ui after authentication.  Must be pre-registered to the client in the IDP.  | n/a       | Yes       |
+| VUE_APP_IDP_CLIENT_ID       | ID issued to mc-shop-ui by the IDP.                                                                                                        | n/a       | Yes       |

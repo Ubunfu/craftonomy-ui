@@ -1,6 +1,6 @@
 <template>
   <div v-if="!isAuthenticated" class="login-container">
-    <a :href="loginLink"><div class="login">LOG IN</div></a>
+    <a :href="idpLoginURL"><div class="login">LOG IN</div></a>
   </div>
   <div v-else class="login-container">
     <div class="profile"> Welcome, {{ username }}</div>
@@ -19,7 +19,7 @@ export default {
   },
   data() {
     return {
-      loginLink: process.env.VUE_APP_LOGIN_LINK,
+      idpLoginURL: `${process.env.VUE_APP_IDP_LOGIN_URI}?response_type=code&client_id=${process.env.VUE_APP_IDP_CLIENT_ID}&redirect_uri=${process.env.VUE_APP_IDP_REDIRECT_URI}`,
     }
   },
   computed: {
