@@ -5,12 +5,22 @@ import Home from "@/components/Home";
 import Authorize from "@/components/Authorize";
 import Error from "@/components/Error";
 import Secret from "@/components/Secret";
+import ShopHome from "@/components/shop/ShopHome";
 
 const routes = [
     {
         path: "/",
         name: "Home",
         component: Home,
+        props: route => ({
+            isAuthenticated: route.params.isAuthenticated,
+            idToken: route.params.idToken
+        })
+    },
+    {
+        path: "/shop",
+        name: "Shop",
+        component: ShopHome,
         props: route => ({
             isAuthenticated: route.params.isAuthenticated,
             idToken: route.params.idToken

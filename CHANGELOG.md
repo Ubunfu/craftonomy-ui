@@ -4,6 +4,7 @@ This project attempts to conform to [SemVer](https://semver.org/) guidelines whe
 ## [v2.1.0]
 * Adding authentication and authorization support
 * Switching from S3 hosting to NGINX
+* Generalize landing page to add support for non-shop functionality
 
 ## [v2.0.0]
 * [Rewriting the app as a Vue JS SPA](https://github.com/Ubunfu/mc-shop-ui/pull/6)
