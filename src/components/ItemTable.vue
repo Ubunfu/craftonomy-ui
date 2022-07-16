@@ -16,12 +16,13 @@
             </tr>
         </table>
     </div>
-    <h2 v-else-if="errorLoadingShopItems">Error Loading Shop Items!</h2>
-    <h2 v-else>Loading ...</h2>
+    <div v-else-if="errorLoadingShopItems" class="itemTable"><h2>Error Loading Shop Items!</h2></div>
+    <div v-else class="itemTable"><h2>Loading ...</h2></div>
 </template>
 
 <script>
-import {getItems} from "@/shopService";
+import {getItems, itemMatchesQuery} from "@/services/shopService";
+
 export default {
     data() {
         return {
@@ -71,19 +72,12 @@ export default {
         }
     }
 }
-
-function itemMatchesQuery(item, query) {
-    if(item.itemName.includes(query)) {
-        return true
-    }
-    if(item.itemId.includes(query)) {
-        return true
-    }
-    return false
-}
 </script>
 
 <style>
+.itemTable {
+  flex-grow: 4;
+}
 table {
     margin: 0 auto;
     text-align: center;
@@ -100,6 +94,7 @@ td {
     padding: 0 20px;
 }
 input {
-    margin: 20px 0;
+  margin: 20px 30%;
+  width: 30%;
 }
 </style>
