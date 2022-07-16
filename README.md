@@ -10,6 +10,11 @@ A simple web UI to show the catalog of items available within mc-shop.
 ## Configuration
 
 ### Environment Variables
+
+The Dockerfile compiles this project into static HTML/CSS/JS and loads it into an NGINX web server.  The environment 
+variables are sourced from `.env` files and processed at compile time, so if serving this project from a Docker container, changes to these configs
+will require rebuilding the image for them to take effect.    
+
 | Parameter                   | Description                                                                                                                                | Default   | Required? |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|-----------|-----------|
 | VUE_APP_MC_SHOP_CATALOG_URL | URL for the web service returning the mc-shop item catalog.                                                                                | n/a       | Yes       |
