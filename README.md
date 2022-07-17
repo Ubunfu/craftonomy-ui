@@ -7,6 +7,17 @@
 
 A simple web UI to show the catalog of items available within mc-shop.
 
+## Run Locally
+
+1. In the root of the project, create a file named `.env`, and within it, set all of the config that's required (as 
+noted below) in the [format expected by `dotenv`](https://www.dotenv.org/env). 
+2. Build the Docker image by running `docker compose build`.
+3. Bring the service up by running `docker compose up`.
+4. The site is available at http://localhost:8080.
+
+> Note: You can build and run in one step by running `docker compose up --build`. Any changes to the config set in 
+> `.env` will require the whole image to be re-built and started up again to take effect.
+
 ## Configuration
 
 ### Environment Variables

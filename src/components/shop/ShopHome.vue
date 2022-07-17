@@ -1,20 +1,21 @@
 <template>
   <SiteHeader :isAuthenticated="isAuthenticated" :idToken="idToken"/>
   <div class="body-container">
-    <NavBar/>
+    <ShopNavBar v-if="isAuthenticated" />
     <ItemTable/>
   </div>
-  <p><a href="https://www.flaticon.com/free-icons/pickaxe" title="pickaxe icons">Pickaxe icons created by Us and Up - Flaticon</a></p>
+  <Footer />
 </template>
 
 <script>
 import SiteHeader from '@/components/SiteHeader.vue';
 import ItemTable from "@/components/shop/ItemTable";
-import NavBar from "@/components/shop/NavBar";
+import ShopNavBar from "@/components/shop/ShopNavBar";
+import Footer from "@/components/Footer";
 
 export default {
   name: "ShopHome",
-  components: {SiteHeader, ItemTable, NavBar},
+  components: {Footer, SiteHeader, ItemTable, ShopNavBar},
   props: {
     isAuthenticated: Boolean,
     idToken: String
