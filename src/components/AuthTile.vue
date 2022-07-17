@@ -38,7 +38,9 @@ export default {
 
 <style scoped>
 .login-container {
-  padding: 0 50px;
+  margin-right: 50px;
+  float: right;
+  clear: both;
 }
 .login-container a {
   color: gray;

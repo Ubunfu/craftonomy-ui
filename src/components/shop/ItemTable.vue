@@ -1,23 +1,23 @@
 <template>
-    <div class="itemTable" v-if="shopItems">
-        <input type="search" name="itemFilter" id="" v-model="query" v-on:keyup="filterItems()" placeholder="Filter items...">
-        <table>
-            <th>
-                <td>Item Name</td>
-                <td>Minecraft ID</td>
-                <td v-on:click="sortItemsByPurchasePrice()">Purchase Price</td>
-                <td v-on:click="sortItemsBySellPrice()">Sell Price</td>
-            </th>
-            <tr v-for="item of filteredItems" :key="item.minecraftId">
-                <td>{{item.itemName}}</td>
-                <td>{{item.itemId}}</td>
-                <td>{{item.price}}</td>
-                <td>{{item.sellPrice}}</td>
-            </tr>
-        </table>
-    </div>
-    <div v-else-if="errorLoadingShopItems" class="itemTable"><h2>Error Loading Shop Items!</h2></div>
-    <div v-else class="itemTable"><h2>Loading ...</h2></div>
+  <div class="itemTable" v-if="shopItems">
+      <input type="search" name="itemFilter" id="" v-model="query" v-on:keyup="filterItems()" placeholder="Filter items...">
+      <table>
+          <tr>
+              <th>Item Name</th>
+              <th>Minecraft ID</th>
+              <th v-on:click="sortItemsByPurchasePrice()">Purchase Price</th>
+              <th v-on:click="sortItemsBySellPrice()">Sell Price</th>
+          </tr>
+          <tr v-for="item of filteredItems" :key="item.minecraftId" class="shopItem">
+              <td>{{item.itemName}}</td>
+              <td>{{item.itemId}}</td>
+              <td>{{item.price}}</td>
+              <td>{{item.sellPrice}}</td>
+          </tr>
+      </table>
+  </div>
+  <div v-else-if="errorLoadingShopItems" class="itemTable"><h2>Error Loading Shop Items!</h2></div>
+  <div v-else class="itemTable"><h2>Loading ...</h2></div>
 </template>
 
 <script>
@@ -75,20 +75,13 @@ export default {
 </script>
 
 <style>
-.itemTable {
-  flex-grow: 4;
-}
 table {
     margin: 0 auto;
     text-align: center;
 }
-table tr:hover {
+table .shopItem:hover {
     background-color: #666666;
     color: white;
-}
-th {
-    display: table-header-group;
-    font-size: 1.5em;
 }
 td {
     padding: 0 20px;

@@ -1,8 +1,8 @@
 <template>
   <div class="header">
-    <div class="title">
-      <router-link to="/" class="homeLink">Craftonomy Shop</router-link>
-    </div>
+    <router-link to="/" class="homeLink">
+      <img src="@/assets/craftonomy-75.png" alt="">
+    </router-link>
     <AuthTile :isAuthenticated="isAuthenticated" :idToken="idToken"/>
   </div>
 </template>
@@ -24,16 +24,12 @@ export default {
 
 <style scoped>
 .header {
-  display: flex;
   margin-bottom: 50px;
-}
-.title {
-  font-size: 4em;
-  flex: auto;
-  padding: 0 50px;
+  text-align: center;
 }
 .homeLink {
   text-decoration: none;
   color: #2c3e50;
+  font-size: 4em;
 }
 </style>

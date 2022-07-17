@@ -1,7 +1,8 @@
 <template>
   <div class="nav-container">
-    <div class="nav-link">View Catalog</div>
-    <div class="nav-link">Manage Catalog</div>
+    <router-link to="/shop/addItem">
+      <div class="nav-link">Add Item</div>
+    </router-link>
   </div>
 </template>
 
@@ -14,13 +15,13 @@ export default {
 <style scoped>
 .nav-container {
   display: flex;
-  flex-direction: column;
-  margin-right: 50px;
-  flex-grow: 1;
-  max-width: 20%;
+  flex-direction: row;
+  width: fit-content;
+  margin: 0 auto;
 }
 .nav-link {
   max-height: 35px;
+  max-width: 300px;
   background-color: lightcyan;
   padding: 5px 20px;
   color: gray;
@@ -29,6 +30,9 @@ export default {
   vertical-align: center;
   text-align: center;
   font-size: 25px;
-  margin: 5px 0;
+  margin: 0 10px;
+}
+.nav-link:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 150, 150, 0.2), 0 6px 20px 0 rgba(0, 150, 150, 0.19);
 }
 </style>
