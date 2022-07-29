@@ -7,5 +7,6 @@ RUN npm run build
 
 FROM nginx:alpine as prod-stage
 RUN mkdir /app
+RUN mkdir /etc/nginx/certs
 COPY --from=build-stage /app/dist /app
 COPY nginx.conf /etc/nginx/nginx.conf

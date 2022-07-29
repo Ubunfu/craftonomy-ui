@@ -33,3 +33,21 @@ will require rebuilding the image for them to take effect.
 | VUE_APP_IDP_TOKEN_URI       | URL for the OAuth API provided by the IDP used to exchange an auth code for tokens.                                                        | n/a       | Yes       |
 | VUE_APP_IDP_REDIRECT_URI    | URL that the IDP will use to redirect the user back to mc-shop-ui after authentication.  Must be pre-registered to the client in the IDP.  | n/a       | Yes       |
 | VUE_APP_IDP_CLIENT_ID       | ID issued to mc-shop-ui by the IDP.                                                                                                        | n/a       | Yes       |
+
+### TLS Certificates
+
+NGINX is configured for TLS usage, so it's necessary to generate some certificates and place them in a directory where 
+NGINX can find them and load them up.
+
+1. Install [certbot](https://certbot.eff.org/instructions) to help generate TLS certificates issued by 
+[Let's Encrypt](https://letsencrypt.org/) for free.
+2. Since this runs in a containerized environment instead of on traditional persistent webserver infrastructure, just
+operate certbot in manual mode.  You will have to manually complete a couple challenges to prove domain ownership, then
+it will write your certificate files locally.  `sudo certbot certonly --manual`
+3. Use OpenSSL to generate a file containing Diffie-Hellman key exchange parameters used by NGINX.  The command assumes
+your TLS certs were generated with 2048-bit keys, so adjust if necessary: 
+`openssl dhparam 2048 -out dhparam.pem`
+4. Download the latest cross-signed certificates from Let's Encrypt to support OCSP stapling by NGINX: 
+`wget -O lets-encrypt-x3-cross-signed.pem "https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem"`
+5. Put all the files generated above in a directory on the server that will host the app.  Make these files available
+to the docker container overriding `/path/my/certs` to this directory in `docker-compose.yml` 
