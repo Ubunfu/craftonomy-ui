@@ -7,6 +7,7 @@ This project attempts to conform to [SemVer](https://semver.org/) guidelines whe
 * Generalize landing page to add support for non-shop functionality
 * Creating shop add item page
 * Configuring NGINX to use TLS
+* Improving responsiveness of header and home tiles. Improving the layout of the auth tile.
 
 ## [v2.0.0]
 * [Rewriting the app as a Vue JS SPA](https://github.com/Ubunfu/mc-shop-ui/pull/6)

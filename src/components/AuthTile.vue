@@ -3,9 +3,13 @@
     <a :href="idpLoginURL"><div class="login">LOG IN</div></a>
   </div>
   <div v-else class="login-container">
-    <div class="profile"> Welcome, {{ username }}</div>
+    <div class="profile">
+      <div class="user">{{ username }}</div>
+      <img src="@/assets/avatar-64.png" alt="">
+    </div>
     <div class="logout" v-on:click="logOut()">LOG OUT</div>
   </div>
+  <p>{{windowWidth}}</p>
 </template>
 
 <script>
@@ -25,6 +29,9 @@ export default {
   computed: {
     username() {
       return decode(this.idToken)['cognito:username']
+    },
+    windowWidth() {
+      return this.$store.state.windowWidth;
     }
   },
   methods: {
@@ -43,13 +50,14 @@ export default {
   clear: both;
 }
 .login-container a {
-  color: gray;
+  color: cyan;
   text-decoration: none;
 }
 .login {
   padding: 5px 20px;
-  background-color: cyan;
+  background-color: #555;
   border-radius: 5px;
+  box-shadow: 0 1px 5px 0 #555;
 }
 .logout {
   padding: 5px 20px;
@@ -60,5 +68,13 @@ export default {
   text-align: right;
   margin-left: auto;
   margin-right: 0;
+}
+.profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.profile .user {
+  padding-right: 10px;
 }
 </style>

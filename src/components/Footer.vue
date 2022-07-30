@@ -4,6 +4,7 @@
   <p><a href="https://www.flaticon.com/free-icons/server" title="server icons">Server icons created by Roundicons - Flaticon</a></p>
   <p><a href="https://www.flaticon.com/free-icons/wallet" title="wallet icons">Wallet icons created by Nhor Phai - Flaticon</a></p>
   <p><a href="https://www.flaticon.com/free-icons/vault" title="vault icons">Vault icons created by Creative Stall Premium - Flaticon</a></p>
+  <p><a href="https://textcraft.net/">Minecraft Font Text Generator</a></p>
 </template>
 
 <script>

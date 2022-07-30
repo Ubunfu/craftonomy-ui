@@ -1,7 +1,12 @@
 <template>
   <div class="header">
     <router-link to="/" class="homeLink">
-      <img src="@/assets/craftonomy-75.png" alt="">
+      <picture>
+        <source media="(max-width:650px)" srcset="@/assets/header-small.png">
+        <source media="(max-width:800px)" srcset="@/assets/header-mid.png">
+        <source media="(max-width:1000px)" srcset="@/assets/header-large.png">
+        <img src="@/assets/header-extra.png" alt="">
+      </picture>
     </router-link>
     <AuthTile :isAuthenticated="isAuthenticated" :idToken="idToken"/>
   </div>

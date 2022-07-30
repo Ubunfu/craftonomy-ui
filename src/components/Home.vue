@@ -43,10 +43,17 @@ export default {
   row-gap: 50px;
   grid-template-columns: auto auto;
   margin: auto;
+  padding: 0 20px;
+}
+@media screen and (max-width: 600px) {
+  .tiles {
+    /* Knock it down to single-column on narrow screens */
+    grid-template-columns: auto;
+  }
 }
 @media screen and (min-width: 1000px) {
   .tiles {
-    max-width: 50%;
+    padding: 0 100px;
   }
 }
 
