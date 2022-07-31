@@ -50,4 +50,12 @@ your TLS certs were generated with 2048-bit keys, so adjust if necessary:
 4. Download the latest cross-signed certificates from Let's Encrypt to support OCSP stapling by NGINX: 
 `wget -O lets-encrypt-x3-cross-signed.pem "https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem"`
 5. Put all the files generated above in a directory on the server that will host the app.  Make these files available
-to the docker container overriding `/path/my/certs` to this directory in `docker-compose.yml` 
+to the docker container overriding `/path/my/certs` to this directory in `docker-compose.yml`
+
+## Design Principles
+
+### Component Styling
+Generally speaking, an attempt has been made to limit component-scoped styling to that which is just enough to allow the
+component to appear how it is meant to, without consideration for where or how it may be used within the site.  Styling 
+related to the placement / usage of a component is delegated to the instantiating component.  This seems to help 
+promote generality and re-use as first-class considerations when designing components.

@@ -8,21 +8,31 @@
         <img src="@/assets/header-extra.png" alt="">
       </picture>
     </router-link>
-    <AuthTile :isAuthenticated="isAuthenticated" :idToken="idToken"/>
+    <div class="auth-tile-wrapper">
+      <AuthTile v-if="windowWidth > 500" :isAuthenticated="isAuthenticated" :idToken="idToken"/>
+      <AuthDrawerToggle v-else :isAuthenticated="isAuthenticated" :idToken="idToken"/>
+    </div>
   </div>
 </template>
 
 <script>
 import AuthTile from "@/components/AuthTile";
+import AuthDrawerToggle from "@/components/AuthDrawerToggle";
 
 export default {
+  name: 'SiteHeader',
+  components: {
+    AuthDrawerToggle,
+    AuthTile
+  },
   props: {
     isAuthenticated: Boolean,
     idToken: String
   },
-  name: 'SiteHeader',
-  components: {
-    AuthTile
+  computed: {
+    windowWidth() {
+      return this.$store.state.windowWidth;
+    }
   }
 }
 </script>
@@ -30,7 +40,14 @@ export default {
 <style scoped>
 .header {
   margin-bottom: 50px;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 50px;
+}
+@media screen and (max-width: 450px){
+  .header {
+    padding: 0 10px;
+  }
 }
 .homeLink {
   text-decoration: none;
