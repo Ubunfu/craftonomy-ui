@@ -8,6 +8,7 @@ This project attempts to conform to [SemVer](https://semver.org/) guidelines whe
 * Creating shop add item page
 * Configuring NGINX to use TLS
 * Improving responsiveness of header and home tiles. Improving the layout of the auth tile.
+* Improving responsiveness of shop table
 
 ## [v2.0.0]
 * [Rewriting the app as a Vue JS SPA](https://github.com/Ubunfu/mc-shop-ui/pull/6)

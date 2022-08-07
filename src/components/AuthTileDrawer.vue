@@ -15,7 +15,7 @@
 import {decode} from "jsonwebtoken";
 
 export default {
-  name: "AuthDrawerToggle",
+  name: "AuthTileDrawer",
   props: {
     isAuthenticated: Boolean,
     idToken: String

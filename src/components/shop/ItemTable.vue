@@ -2,17 +2,17 @@
   <div class="itemTable" v-if="shopItems">
       <input type="search" name="itemFilter" id="" v-model="query" v-on:keyup="filterItems()" placeholder="Filter items...">
       <table>
-          <tr>
+          <tr class="tableHeader">
               <th>Item Name</th>
-              <th>Minecraft ID</th>
+              <th v-if="windowWidth > 600">Minecraft ID</th>
               <th v-on:click="sortItemsByPurchasePrice()">Purchase Price</th>
               <th v-on:click="sortItemsBySellPrice()">Sell Price</th>
           </tr>
           <tr v-for="item of filteredItems" :key="item.minecraftId" class="shopItem">
               <td>{{item.itemName}}</td>
-              <td>{{item.itemId}}</td>
-              <td>{{item.price}}</td>
-              <td>{{item.sellPrice}}</td>
+              <td v-if="windowWidth > 600">{{item.itemId}}</td>
+              <td class="itemPrice">{{item.price}}</td>
+              <td class="itemSellPrice">{{item.sellPrice}}</td>
           </tr>
       </table>
   </div>
@@ -35,6 +35,11 @@ export default {
     },
     async created() {
       await this.getShopItems()
+    },
+    computed: {
+      windowWidth() {
+        return this.$store.state.windowWidth;
+      }
     },
     methods: {
         async getShopItems() {
@@ -77,11 +82,19 @@ export default {
 <style>
 table {
     margin: 0 auto;
-    text-align: center;
 }
-table .shopItem:hover {
-    background-color: #666666;
-    color: white;
+.tableHeader {
+  text-align: center;
+}
+.shopItem {
+  text-align: left;
+}
+.shopItem:hover {
+  background-color: #666666;
+  color: white;
+}
+.itemPrice, .itemSellPrice {
+  text-align: right;
 }
 td {
     padding: 0 20px;
@@ -89,5 +102,11 @@ td {
 input {
   margin: 20px 30%;
   width: 30%;
+}
+@media screen and (max-width: 600px){
+  input {
+    margin: 0 0 20px 0;
+    width: 100%;
+  }
 }
 </style>

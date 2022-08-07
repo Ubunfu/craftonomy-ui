@@ -10,19 +10,19 @@
     </router-link>
     <div class="auth-tile-wrapper">
       <AuthTile v-if="windowWidth > 500" :isAuthenticated="isAuthenticated" :idToken="idToken"/>
-      <AuthDrawerToggle v-else :isAuthenticated="isAuthenticated" :idToken="idToken"/>
+      <AuthTileDrawer v-else :isAuthenticated="isAuthenticated" :idToken="idToken"/>
     </div>
   </div>
 </template>
 
 <script>
 import AuthTile from "@/components/AuthTile";
-import AuthDrawerToggle from "@/components/AuthDrawerToggle";
+import AuthTileDrawer from "@/components/AuthTileDrawer";
 
 export default {
   name: 'SiteHeader',
   components: {
-    AuthDrawerToggle,
+    AuthTileDrawer,
     AuthTile
   },
   props: {
