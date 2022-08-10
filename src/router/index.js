@@ -6,6 +6,7 @@ import Authorize from "@/components/Authorize";
 import Error from "@/components/Error";
 import Secret from "@/components/Secret";
 import ShopHome from "@/components/shop/ShopHome";
+import ShopAddItem from "@/components/shop/ShopAddItem/ShopAddItem";
 
 const routes = [
     {
@@ -22,6 +23,19 @@ const routes = [
         name: "Shop",
         component: ShopHome,
         props: route => ({
+            isAuthenticated: route.params.isAuthenticated,
+            idToken: route.params.idToken
+        })
+    },
+    {
+        path: "/shop/addItem",
+        name: "ShopAddItem",
+        component: ShopAddItem,
+        meta: {
+          requiresAuth: true
+        },
+        props: route => ({
+
             isAuthenticated: route.params.isAuthenticated,
             idToken: route.params.idToken
         })
@@ -55,6 +69,11 @@ const router = createRouter({
     routes,
 });
 
+/*
+* Middleware interceptor
+* Checks if the `authn` cookie is set, and if so, extracts the ID Token held within to pass along to components that
+* need it
+*/
 router.beforeEach((to) => {
     if(isAuthenticated(window.$cookies.get('authn'))) {
         to.params.isAuthenticated = true
@@ -62,6 +81,10 @@ router.beforeEach((to) => {
     }
 })
 
+/*
+* Middleware interceptor
+* If the route we're going to requires authn, but requestor isn't authn'd, ask them to log in first
+*/
 router.beforeEach((to) => {
     if(to.meta.requiresAuth && !to.params.isAuthenticated) {
         console.error('Unauthenticated request to privileged page')

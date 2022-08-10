@@ -1,10 +1,13 @@
 <template>
-  <div v-if="!isAuthenticated" class="login-container">
-    <a :href="idpLoginURL"><div class="login">LOG IN</div></a>
+  <div v-if="!isAuthenticated" class="auth-tile">
+    <a :href="idpLoginURL"><div class="button-login">LOG IN</div></a>
   </div>
-  <div v-else class="login-container">
-    <div class="profile"> Welcome, {{ username }}</div>
-    <div class="logout" v-on:click="logOut()">LOG OUT</div>
+  <div v-else class="auth-tile">
+    <div class="profile">
+      <div class="user">{{ username }}</div>
+      <img src="@/assets/avatar-64.png" alt="">
+    </div>
+    <div class="button-logout" v-on:click="logOut()">LOG OUT</div>
   </div>
 </template>
 
@@ -25,7 +28,7 @@ export default {
   computed: {
     username() {
       return decode(this.idToken)['cognito:username']
-    }
+    },
   },
   methods: {
     logOut() {
@@ -37,21 +40,20 @@ export default {
 </script>
 
 <style scoped>
-.login-container {
-  margin-right: 50px;
-  float: right;
-  clear: both;
+.auth-tile {
+  max-width: fit-content;
 }
-.login-container a {
-  color: gray;
+.auth-tile a {
+  color: cyan;
   text-decoration: none;
 }
-.login {
+.button-login {
   padding: 5px 20px;
-  background-color: cyan;
+  background-color: #555;
   border-radius: 5px;
+  box-shadow: 0 1px 5px 0 #555;
 }
-.logout {
+.button-logout {
   padding: 5px 20px;
   background-color: #aa0000;
   border-radius: 5px;
@@ -60,5 +62,14 @@ export default {
   text-align: right;
   margin-left: auto;
   margin-right: 0;
+}
+.profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.profile .user {
+  padding-right: 10px;
+  font-weight: bold;
 }
 </style>

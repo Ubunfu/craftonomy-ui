@@ -6,6 +6,15 @@
 
 export default {
   name: 'App',
+  created() {
+    window.addEventListener('resize', () => {
+      this.$store.commit('setWindowWidth');
+    })
+  },
+  unmounted() {
+    // stops memory leaks?
+    window.removeEventListener('resize');
+  }
 }
 </script>
 

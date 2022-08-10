@@ -17,21 +17,18 @@
         </router-link>
       </div>
     </div>
-    <p><a href="https://www.flaticon.com/free-icons/pickaxe" title="pickaxe icons">Pickaxe icons created by Us and Up - Flaticon</a></p>
-    <p><a href="https://www.flaticon.com/free-icons/shop" title="shop icons">Shop icons created by Vectors Market - Flaticon</a></p>
-    <p><a href="https://www.flaticon.com/free-icons/server" title="server icons">Server icons created by Roundicons - Flaticon</a></p>
-    <p><a href="https://www.flaticon.com/free-icons/wallet" title="wallet icons">Wallet icons created by Nhor Phai - Flaticon</a></p>
-    <p><a href="https://www.flaticon.com/free-icons/vault" title="vault icons">Vault icons created by Creative Stall Premium - Flaticon</a></p>
   </div>
+  <Footer/>
 </template>
 
 <script>
 import SiteHeader from '@/components/SiteHeader.vue';
 import HomeTile from "@/components/HomeTile";
+import Footer from "@/components/Footer";
 
 export default {
   name: "Home",
-  components: {HomeTile, SiteHeader},
+  components: {Footer, HomeTile, SiteHeader},
   props: {
     isAuthenticated: Boolean,
     idToken: String
@@ -46,10 +43,17 @@ export default {
   row-gap: 50px;
   grid-template-columns: auto auto;
   margin: auto;
+  padding: 0 20px;
+}
+@media screen and (max-width: 600px) {
+  .tiles {
+    /* Knock it down to single-column on narrow screens */
+    grid-template-columns: auto;
+  }
 }
 @media screen and (min-width: 1000px) {
   .tiles {
-    max-width: 50%;
+    padding: 0 100px;
   }
 }
 
