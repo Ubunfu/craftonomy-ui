@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import SiteHeader from '@/components/SiteHeader.vue';
-import ItemTable from "@/components/shop/ItemTable";
-import ShopNavBar from "@/components/shop/ShopNavBar";
-import Footer from "@/components/Footer";
+import SiteHeader from '../../components/SiteHeader.vue';
+import ItemTable from "../../components/shop/ItemTable.vue";
+import ShopNavBar from "../../components/shop/ShopNavBar.vue";
+import Footer from "../../components/Footer.vue";
 
 export default {
   name: "ShopHome",

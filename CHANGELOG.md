@@ -1,6 +1,10 @@
 # Changelog
 This project attempts to conform to [SemVer](https://semver.org/) guidelines whenever possible.
 
+## [v3.0.0]
+* Switching to Vite build system and updating a bunch of stuff to mitigate 
+security vulnerabilities
+
 ## [v2.1.0]
 * Adding authentication and authorization support
 * Switching from S3 hosting to NGINX

@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import SiteHeader from "@/components/SiteHeader";
-import Footer from "@/components/Footer";
+import SiteHeader from "../../../components/SiteHeader.vue";
+import Footer from "../../../components/Footer.vue";
 
 export default {
   name: "ShopAddItem",

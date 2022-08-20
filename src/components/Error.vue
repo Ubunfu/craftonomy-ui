@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import SiteHeader from "@/components/SiteHeader";
+import SiteHeader from "../components/SiteHeader.vue";
 
 export default {
   name: "Error",

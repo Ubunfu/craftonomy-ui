@@ -1,25 +1,12 @@
-import 'dotenv/config'
 import {createApp} from 'vue'
-import App from './App.vue'
-import router from "@/router";
-import VueCookies from 'vue-cookies'
-import {createStore} from 'vuex'
+import {createPinia} from 'pinia'
 
-const store = createStore({
-    state() {
-        return {
-            windowWidth: window.innerWidth,
-        }
-    },
-    mutations: {
-        setWindowWidth(state) {
-            state.windowWidth = window.innerWidth;
-        }
-    }
-})
+import App from './App.vue'
+import router from "./router";
+import VueCookies from 'vue-cookies'
 
 createApp(App)
-    .use(store)
+    .use(createPinia())
     .use(router)
     .use(VueCookies)
     .mount('#app')

@@ -21,67 +21,72 @@
 </template>
 
 <script>
-import {getItems, itemMatchesQuery} from "@/services/shopService";
+import {getItems, itemMatchesQuery} from "../../services/shopService";
+import {useWindowWidthStore} from "../../store";
 
 export default {
-    data() {
-        return {
-            shopItems: null,
-            filteredItems: null,
-            query: '',
-            sortByValueDescending: true,
-            errorLoadingShopItems: false
-        }
-    },
-    async created() {
-      await this.getShopItems()
-    },
-    computed: {
-      windowWidth() {
-        return this.$store.state.windowWidth;
-      }
-    },
-    methods: {
-        async getShopItems() {
-          try {
-            this.shopItems = await getItems()
-          } catch {
-            this.errorLoadingShopItems = true
-          }
-          this.filteredItems = this.shopItems
-        },
-        filterItems() {
-            let refilteredItems = []
-            this.shopItems.forEach(item => {
-                if(itemMatchesQuery(item, this.query)) {
-                    refilteredItems.push(item)
-                }
-            });
-            this.filteredItems = refilteredItems
-        },
-        sortItemsByPurchasePrice() {
-            if(this.sortByValueDescending) {
-                this.filteredItems.sort((item1, item2) => item2.price - item1.price)
-            } else {
-                this.filteredItems.sort((item1, item2) => item1.price - item2.price)
-            }
-            this.sortByValueDescending = !this.sortByValueDescending
-        },
-        sortItemsBySellPrice() {
-            if(this.sortByValueDescending) {
-                this.filteredItems.sort((item1, item2) => item2.sellPrice - item1.sellPrice)
-            } else {
-                this.filteredItems.sort((item1, item2) => item1.sellPrice - item2.sellPrice)
-            }
-            this.sortByValueDescending = !this.sortByValueDescending
-        }
+  setup() {
+    const store = useWindowWidthStore();
+    return {store}
+  },
+  data() {
+    return {
+      shopItems: null,
+      filteredItems: null,
+      query: '',
+      sortByValueDescending: true,
+      errorLoadingShopItems: false
     }
+  },
+  async created() {
+    await this.getShopItems()
+  },
+  computed: {
+    windowWidth() {
+      return this.store.getWindowWidth;
+    }
+  },
+  methods: {
+    async getShopItems() {
+      try {
+        this.shopItems = await getItems()
+      } catch {
+        this.errorLoadingShopItems = true
+      }
+      this.filteredItems = this.shopItems
+    },
+    filterItems() {
+      let refilteredItems = []
+      this.shopItems.forEach(item => {
+        if(itemMatchesQuery(item, this.query)) {
+            refilteredItems.push(item)
+        }
+      });
+      this.filteredItems = refilteredItems
+    },
+    sortItemsByPurchasePrice() {
+      if(this.sortByValueDescending) {
+        this.filteredItems.sort((item1, item2) => item2.price - item1.price)
+      } else {
+        this.filteredItems.sort((item1, item2) => item1.price - item2.price)
+      }
+      this.sortByValueDescending = !this.sortByValueDescending
+    },
+    sortItemsBySellPrice() {
+      if(this.sortByValueDescending) {
+        this.filteredItems.sort((item1, item2) => item2.sellPrice - item1.sellPrice)
+      } else {
+        this.filteredItems.sort((item1, item2) => item1.sellPrice - item2.sellPrice)
+      }
+      this.sortByValueDescending = !this.sortByValueDescending
+    }
+  }
 }
 </script>
 
 <style>
 table {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 .tableHeader {
   text-align: center;
@@ -97,7 +102,7 @@ table {
   text-align: right;
 }
 td {
-    padding: 0 20px;
+  padding: 0 20px;
 }
 input {
   margin: 20px 30%;

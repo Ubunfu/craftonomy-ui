@@ -1,7 +1,7 @@
 <template>
   <div class="auth-drawer-toggle">
     <picture>
-      <img src="@/assets/hamburger.png" alt="">
+      <img src="../assets/hamburger.png" alt="">
     </picture>
     <div class="drawer-content">
       <a v-if="!isAuthenticated" :href="idpLoginURL"><div class="drawer-item">LOG IN</div></a>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {decode} from "jsonwebtoken";
+import jwtDecode from "jwt-decode";
 
 export default {
   name: "AuthTileDrawer",
@@ -22,12 +22,12 @@ export default {
   },
   data() {
     return {
-      idpLoginURL: `${process.env.VUE_APP_IDP_LOGIN_URI}?response_type=code&client_id=${process.env.VUE_APP_IDP_CLIENT_ID}&redirect_uri=${process.env.VUE_APP_IDP_REDIRECT_URI}`,
+      idpLoginURL: `${import.meta.env.VITE_IDP_LOGIN_URI}?response_type=code&client_id=${import.meta.env.VITE_IDP_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_IDP_REDIRECT_URI}`,
     }
   },
   computed: {
     username() {
-      return decode(this.idToken)['cognito:username']
+      return jwtDecode(this.idToken)['cognito:username']
     },
   },
   methods: {
