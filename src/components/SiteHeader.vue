@@ -25,7 +25,7 @@ import imgHeaderMid from '@/assets/header-mid.png';
 import imgHeaderSmall from '@/assets/header-small.png';
 
 import {computed} from "vue";
-import {useWindowWidthStore} from "../store";
+import {useWindowWidthStore} from "@/store";
 
 const store = useWindowWidthStore();
 const props = defineProps({

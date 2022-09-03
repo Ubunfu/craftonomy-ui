@@ -1,11 +1,11 @@
 import {createRouter, createWebHistory} from "vue-router";
-import {isAuthenticated} from "../services/securityService";
+import {isAuthenticated} from "@/services/securityService";
 
-import Home from "../components/Home.vue";
-import Authorize from "../components/Authorize.vue";
-import Error from "../components/Error.vue";
-import ShopHome from "../components/shop/ShopHome.vue";
-import ShopAddItem from "../components/shop/ShopAddItem/ShopAddItem.vue";
+import Home from "@/components/Home.vue";
+import Authorize from "@/components/Authorize.vue";
+import Error from "@/components/Error.vue";
+import ShopHome from "@/components/shop/ShopHome.vue";
+import ShopAddItem from "@/components/shop/ShopAddItem/ShopAddItem.vue";
 
 const routes = [
     {

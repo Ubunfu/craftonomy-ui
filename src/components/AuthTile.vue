@@ -14,8 +14,9 @@
 <script setup>
 import jwtDecode from 'jwt-decode'
 import {computed} from "vue";
+import router from "@/router";
 
-import imgAvatar from '../assets/avatar-64.png';
+import imgAvatar from '@/assets/avatar-64.png';
 
 const props = defineProps({
   isAuthenticated: Boolean,
@@ -28,7 +29,7 @@ const username = computed(() => jwtDecode(props.idToken)['cognito:username'])
 
 function logOut() {
   $cookies.remove('authn')
-  $router.push({name: 'Home'})
+  router.push({name: 'Home'})
 }
 
 defineExpose(props)

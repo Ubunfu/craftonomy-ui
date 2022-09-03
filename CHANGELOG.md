@@ -3,6 +3,7 @@ This project attempts to conform to [SemVer](https://semver.org/) guidelines whe
 
 ## [v3.0.1]
 * Fixing broken static asset resolution
+* Fixing broken post-auth re-routing
 
 ## [v3.0.0]
 * Switching to Vite build system and updating a bunch of stuff to mitigate 
