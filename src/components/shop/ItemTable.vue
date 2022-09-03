@@ -1,6 +1,6 @@
 <template>
-  <div class="itemTable" v-if="shopItems">
-      <input type="search" name="itemFilter" id="" v-model="query" v-on:keyup="filterItems()" placeholder="Filter items...">
+  <div class="itemTable" v-if="state.shopItems">
+      <input type="search" name="itemFilter" id="" v-model="state.query" v-on:keyup="filterItems()" placeholder="Filter items...">
       <table>
           <tr class="tableHeader">
               <th>Item Name</th>
@@ -8,7 +8,7 @@
               <th v-on:click="sortItemsByPurchasePrice()">Purchase Price</th>
               <th v-on:click="sortItemsBySellPrice()">Sell Price</th>
           </tr>
-          <tr v-for="item of filteredItems" :key="item.minecraftId" class="shopItem">
+          <tr v-for="item of state.filteredItems" :key="item.minecraftId" class="shopItem">
               <td>{{item.itemName}}</td>
               <td v-if="windowWidth > 600">{{item.itemId}}</td>
               <td class="itemPrice">{{item.price}}</td>
@@ -16,72 +16,66 @@
           </tr>
       </table>
   </div>
-  <div v-else-if="errorLoadingShopItems" class="itemTable"><h2>Error Loading Shop Items!</h2></div>
+  <div v-else-if="state.errorLoadingShopItems" class="itemTable"><h2>Error Loading Shop Items!</h2></div>
   <div v-else class="itemTable"><h2>Loading ...</h2></div>
 </template>
 
-<script>
-import {getItems, itemMatchesQuery} from "../../services/shopService";
-import {useWindowWidthStore} from "../../store";
+<script setup>
+import {getItems, itemMatchesQuery} from "@/services/shopService";
+import {useWindowWidthStore} from "@/store";
+import {computed, reactive} from "vue";
 
-export default {
-  setup() {
-    const store = useWindowWidthStore();
-    return {store}
-  },
-  data() {
-    return {
-      shopItems: null,
-      filteredItems: null,
-      query: '',
-      sortByValueDescending: true,
-      errorLoadingShopItems: false
-    }
-  },
-  async created() {
-    await this.getShopItems()
-  },
-  computed: {
-    windowWidth() {
-      return this.store.getWindowWidth;
-    }
-  },
-  methods: {
-    async getShopItems() {
-      try {
-        this.shopItems = await getItems()
-      } catch {
-        this.errorLoadingShopItems = true
-      }
-      this.filteredItems = this.shopItems
-    },
-    filterItems() {
-      let refilteredItems = []
-      this.shopItems.forEach(item => {
-        if(itemMatchesQuery(item, this.query)) {
-            refilteredItems.push(item)
-        }
-      });
-      this.filteredItems = refilteredItems
-    },
-    sortItemsByPurchasePrice() {
-      if(this.sortByValueDescending) {
-        this.filteredItems.sort((item1, item2) => item2.price - item1.price)
-      } else {
-        this.filteredItems.sort((item1, item2) => item1.price - item2.price)
-      }
-      this.sortByValueDescending = !this.sortByValueDescending
-    },
-    sortItemsBySellPrice() {
-      if(this.sortByValueDescending) {
-        this.filteredItems.sort((item1, item2) => item2.sellPrice - item1.sellPrice)
-      } else {
-        this.filteredItems.sort((item1, item2) => item1.sellPrice - item2.sellPrice)
-      }
-      this.sortByValueDescending = !this.sortByValueDescending
-    }
+const store = useWindowWidthStore();
+
+let state = reactive({
+  shopItems: null,
+  filteredItems: null,
+  query: '',
+  sortByValueDescending: true,
+  errorLoadingShopItems: false
+})
+
+const windowWidth = computed(() => store.getWindowWidth)
+
+async function getShopItems() {
+  try {
+    state.shopItems = await getItems()
+  } catch {
+    state.errorLoadingShopItems = true
   }
+  state.filteredItems = state.shopItems
 }
+
+function filterItems() {
+  let refilteredItems = []
+  state.shopItems.forEach(item => {
+    if(itemMatchesQuery(item, state.query)) {
+        refilteredItems.push(item)
+    }
+  });
+  state.filteredItems = refilteredItems
+}
+
+function sortItemsByPurchasePrice() {
+  if(state.sortByValueDescending) {
+    state.filteredItems.sort((item1, item2) => item2.price - item1.price)
+  } else {
+    state.filteredItems.sort((item1, item2) => item1.price - item2.price)
+  }
+  state.sortByValueDescending = !state.sortByValueDescending
+}
+
+function sortItemsBySellPrice() {
+  if(state.sortByValueDescending) {
+    state.filteredItems.sort((item1, item2) => item2.sellPrice - item1.sellPrice)
+  } else {
+    state.filteredItems.sort((item1, item2) => item1.sellPrice - item2.sellPrice)
+  }
+  state.sortByValueDescending = !state.sortByValueDescending
+}
+
+getShopItems();
+
 </script>
 
 <style>

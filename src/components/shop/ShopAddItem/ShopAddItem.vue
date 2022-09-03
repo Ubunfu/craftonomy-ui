@@ -4,18 +4,17 @@
   <Footer />
 </template>
 
-<script>
-import SiteHeader from "../../../components/SiteHeader.vue";
-import Footer from "../../../components/Footer.vue";
+<script setup>
+import SiteHeader from "@/components/SiteHeader.vue";
+import Footer from "@/components/Footer.vue";
 
-export default {
-  name: "ShopAddItem",
-  components: {Footer, SiteHeader},
-  props: {
-    isAuthenticated: Boolean,
-    idToken: String
-  }
-}
+const props = defineProps({
+  isAuthenticated: Boolean,
+  idToken: String
+})
+
+defineExpose(props)
+
 </script>
 
 <style scoped>

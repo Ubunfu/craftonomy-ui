@@ -7,20 +7,19 @@
   <Footer />
 </template>
 
-<script>
-import SiteHeader from '../../components/SiteHeader.vue';
-import ItemTable from "../../components/shop/ItemTable.vue";
-import ShopNavBar from "../../components/shop/ShopNavBar.vue";
-import Footer from "../../components/Footer.vue";
+<script setup>
+import SiteHeader from '@/components/SiteHeader.vue';
+import ItemTable from "@/components/shop/ItemTable.vue";
+import ShopNavBar from "@/components/shop/ShopNavBar.vue";
+import Footer from "@/components/Footer.vue";
 
-export default {
-  name: "ShopHome",
-  components: {Footer, SiteHeader, ItemTable, ShopNavBar},
-  props: {
-    isAuthenticated: Boolean,
-    idToken: String
-  }
-}
+const props = defineProps({
+  isAuthenticated: Boolean,
+  idToken: String
+})
+
+defineExpose(props)
+
 </script>
 
 <style scoped>

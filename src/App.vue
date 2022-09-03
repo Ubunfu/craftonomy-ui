@@ -2,25 +2,17 @@
   <router-view />
 </template>
 
-<script>
-import {useWindowWidthStore} from './store/index'
+<script setup>
+import {useWindowWidthStore} from './store'
+import {onUnmounted} from "vue";
 
-export default {
-  name: 'App',
-  setup() {
-    const store = useWindowWidthStore()
-    return {store}
-  },
-  created() {
-    window.addEventListener('resize', () => {
-      this.store.setWindowWidth();
-    })
-  },
-  unmounted() {
-    // stops memory leaks?
-    window.removeEventListener('resize');
-  }
-}
+const store = useWindowWidthStore()
+
+window.addEventListener('resize', () => {
+  store.setWindowWidth();
+})
+
+onUnmounted(() => window.removeEventListener('resize'))
 </script>
 
 <style>

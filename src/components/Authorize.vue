@@ -5,47 +5,38 @@
   <div v-else class="authzStatus">authorizing ...</div>
 </template>
 
-<script>
+<script setup>
 import {getToken} from "../services/securityService";
 import {useRoute} from 'vue-router'
 import SiteHeader from "../components/SiteHeader.vue";
 
-export default {
-  name: "Authorize",
-  components: {SiteHeader},
+let authorizationError, authorized = null
 
-  data() {
-    return {
-      idToken: null,
-      accessToken: null,
-      refreshToken: null,
-      authorizationError: false,
-      authorized: false
-    }
-  },
-  async created() {
-    const authResp = await this.getAccessToken()
-    this.setAuthCookie(authResp)
-    await this.$router.push({name: 'Home'})
-  },
-  methods: {
-    async getAccessToken() {
-      try {
-        const resp = await getToken(useRoute().query.code)
-        this.authorized = true
-        return resp
-      } catch (e) {
-        this.authorizationError = true
-      }
-    },
-    setAuthCookie(authResponse) {
-      this.$cookies.set("authn", {
-        idToken: authResponse.id_token,
-        accessToken: authResponse.access_token,
-        refreshToken: authResponse.refresh_token})
-    }
+async function authorize() {
+  const authResp = await getAccessToken()
+  setAuthCookie(authResp)
+  await $router.push({name: 'Home'})
+}
+
+async function getAccessToken() {
+  try {
+    const resp = await getToken(useRoute().query.code)
+    authorized = true
+    return resp
+  } catch (e) {
+    authorizationError = true
   }
 }
+
+function setAuthCookie(authResponse) {
+  $cookies.set("authn", {
+    idToken: authResponse.id_token,
+    accessToken: authResponse.access_token,
+    refreshToken: authResponse.refresh_token})
+}
+
+authorize()
+
 </script>
 
 <style scoped>
