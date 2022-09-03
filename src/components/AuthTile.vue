@@ -5,7 +5,7 @@
   <div v-else class="auth-tile">
     <div class="profile">
       <div class="user">{{ username }}</div>
-      <img src="../assets/avatar-64.png" alt="">
+      <img :src="imgAvatar" alt="">
     </div>
     <div class="button-logout" v-on:click="logOut()">LOG OUT</div>
   </div>
@@ -14,6 +14,8 @@
 <script setup>
 import jwtDecode from 'jwt-decode'
 import {computed} from "vue";
+
+import imgAvatar from '../assets/avatar-64.png';
 
 const props = defineProps({
   isAuthenticated: Boolean,

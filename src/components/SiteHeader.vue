@@ -2,10 +2,10 @@
   <div class="header">
     <router-link to="/" class="homeLink">
       <picture>
-        <source media="(max-width:650px)" srcset="../assets/header-small.png">
-        <source media="(max-width:800px)" srcset="../assets/header-mid.png">
-        <source media="(max-width:1000px)" srcset="../assets/header-large.png">
-        <img src="../assets/header-extra.png" alt="">
+        <source media="(max-width:650px)" :srcset="imgHeaderSmall">
+        <source media="(max-width:800px)" :srcset="imgHeaderMid">
+        <source media="(max-width:1000px)" :srcset="imgHeaderLarge">
+        <img :src="imgHeaderExtra" alt="">
       </picture>
     </router-link>
     <div class="auth-tile-wrapper">
@@ -16,9 +16,15 @@
 </template>
 
 <script setup>
-import {computed} from "vue";
 import AuthTile from "@/components/AuthTile.vue";
 import AuthTileDrawer from "@/components/AuthTileDrawer.vue";
+
+import imgHeaderExtra from '@/assets/header-extra.png';
+import imgHeaderLarge from '@/assets/header-large.png';
+import imgHeaderMid from '@/assets/header-mid.png';
+import imgHeaderSmall from '@/assets/header-small.png';
+
+import {computed} from "vue";
 import {useWindowWidthStore} from "../store";
 
 const store = useWindowWidthStore();
