@@ -2,10 +2,10 @@
   <div class="header">
     <router-link to="/" class="homeLink">
       <picture>
-        <source media="(max-width:650px)" srcset="@/assets/header-small.png">
-        <source media="(max-width:800px)" srcset="@/assets/header-mid.png">
-        <source media="(max-width:1000px)" srcset="@/assets/header-large.png">
-        <img src="@/assets/header-extra.png" alt="">
+        <source media="(max-width:650px)" srcset="../assets/header-small.png">
+        <source media="(max-width:800px)" srcset="../assets/header-mid.png">
+        <source media="(max-width:1000px)" srcset="../assets/header-large.png">
+        <img src="../assets/header-extra.png" alt="">
       </picture>
     </router-link>
     <div class="auth-tile-wrapper">
@@ -16,11 +16,16 @@
 </template>
 
 <script>
-import AuthTile from "@/components/AuthTile";
-import AuthTileDrawer from "@/components/AuthTileDrawer";
+import AuthTile from "../components/AuthTile.vue";
+import AuthTileDrawer from "../components/AuthTileDrawer.vue";
+import {useWindowWidthStore} from "../store/index";
 
 export default {
   name: 'SiteHeader',
+  setup() {
+    const store = useWindowWidthStore();
+    return {store}
+  },
   components: {
     AuthTileDrawer,
     AuthTile
@@ -31,7 +36,7 @@ export default {
   },
   computed: {
     windowWidth() {
-      return this.$store.state.windowWidth;
+      return this.store.getWindowWidth;
     }
   }
 }

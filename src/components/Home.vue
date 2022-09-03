@@ -22,9 +22,9 @@
 </template>
 
 <script>
-import SiteHeader from '@/components/SiteHeader.vue';
-import HomeTile from "@/components/HomeTile";
-import Footer from "@/components/Footer";
+import SiteHeader from '../components/SiteHeader.vue';
+import HomeTile from "../components/HomeTile.vue";
+import Footer from "../components/Footer.vue";
 
 export default {
   name: "Home",

@@ -2,7 +2,7 @@
   <div class="tile">
     <div class="title">{{ title }}</div>
     <div class="description">{{ description }}</div>
-    <img :src="require('@/assets/' + image)" alt="">
+    <img :src="imagePath" alt="">
   </div>
 </template>
 
@@ -13,6 +13,11 @@ export default {
     title: String,
     description: String,
     image: String
+  },
+  computed: {
+    imagePath() {
+      return "../src/assets/" + this.image;
+    }
   }
 }
 </script>

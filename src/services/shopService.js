@@ -2,7 +2,7 @@ import axios from "axios";
 
 async function getItems() {
     try {
-        return (await axios.get(`${process.env.VUE_APP_MC_SHOP_CATALOG_URL}`)).data
+        return (await axios.get(`${import.meta.env.VITE_MC_SHOP_CATALOG_URL}`)).data
     } catch (error) {
         console.log(`Error getting items from shop service: ${JSON.stringify(error)}`)
         throw error

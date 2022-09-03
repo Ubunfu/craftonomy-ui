@@ -2,12 +2,12 @@ import axios from "axios";
 
 async function getToken(authCode) {
     const grantType = 'authorization_code'
-    const clientId = process.env.VUE_APP_IDP_CLIENT_ID
-    const redirectUri = process.env.VUE_APP_IDP_REDIRECT_URI
+    const clientId = import.meta.env.VITE_IDP_CLIENT_ID
+    const redirectUri = import.meta.env.VITE_IDP_REDIRECT_URI
     const OAUTH_REQ_PAYLOAD = `grant_type=${grantType}&client_id=${clientId}&code=${authCode}&redirect_uri=${redirectUri}`
     let resp
     try {
-        resp = (await axios.post(process.env.VUE_APP_IDP_TOKEN_URI, OAUTH_REQ_PAYLOAD, {
+        resp = (await axios.post(import.meta.env.VITE_IDP_TOKEN_URI, OAUTH_REQ_PAYLOAD, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }

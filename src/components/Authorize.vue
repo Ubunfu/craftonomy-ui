@@ -6,9 +6,9 @@
 </template>
 
 <script>
-import {getToken} from "@/services/securityService";
+import {getToken} from "../services/securityService";
 import {useRoute} from 'vue-router'
-import SiteHeader from "@/components/SiteHeader";
+import SiteHeader from "../components/SiteHeader.vue";
 
 export default {
   name: "Authorize",
@@ -26,7 +26,7 @@ export default {
   async created() {
     const authResp = await this.getAccessToken()
     this.setAuthCookie(authResp)
-    this.$router.push(`/`)
+    await this.$router.push({name: 'Home'})
   },
   methods: {
     async getAccessToken() {

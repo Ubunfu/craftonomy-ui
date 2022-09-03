@@ -5,14 +5,14 @@
   <div v-else class="auth-tile">
     <div class="profile">
       <div class="user">{{ username }}</div>
-      <img src="@/assets/avatar-64.png" alt="">
+      <img src="../assets/avatar-64.png" alt="">
     </div>
     <div class="button-logout" v-on:click="logOut()">LOG OUT</div>
   </div>
 </template>
 
 <script>
-import {decode} from 'jsonwebtoken'
+import jwtDecode from 'jwt-decode'
 
 export default {
   name: "AuthTile",
@@ -22,12 +22,12 @@ export default {
   },
   data() {
     return {
-      idpLoginURL: `${process.env.VUE_APP_IDP_LOGIN_URI}?response_type=code&client_id=${process.env.VUE_APP_IDP_CLIENT_ID}&redirect_uri=${process.env.VUE_APP_IDP_REDIRECT_URI}`,
+      idpLoginURL: `${import.meta.env.VITE_IDP_LOGIN_URI}?response_type=code&client_id=${import.meta.env.VITE_IDP_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_IDP_REDIRECT_URI}`,
     }
   },
   computed: {
     username() {
-      return decode(this.idToken)['cognito:username']
+      return jwtDecode(this.idToken)['cognito:username']
     },
   },
   methods: {
