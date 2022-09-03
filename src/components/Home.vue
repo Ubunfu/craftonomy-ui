@@ -21,19 +21,18 @@
   <Footer/>
 </template>
 
-<script>
-import SiteHeader from '../components/SiteHeader.vue';
-import HomeTile from "../components/HomeTile.vue";
-import Footer from "../components/Footer.vue";
+<script setup>
+import SiteHeader from '@/components/SiteHeader.vue';
+import HomeTile from "@/components/HomeTile.vue";
+import Footer from "@/components/Footer.vue";
 
-export default {
-  name: "Home",
-  components: {Footer, HomeTile, SiteHeader},
-  props: {
-    isAuthenticated: Boolean,
-    idToken: String
-  }
-}
+const props = defineProps({
+  isAuthenticated: Boolean,
+  idToken: String
+})
+
+defineExpose(props)
+
 </script>
 
 <style>

@@ -4,17 +4,16 @@
   <p class="callToAction">{{ callToAction }}</p>
 </template>
 
-<script>
-import SiteHeader from "../components/SiteHeader.vue";
+<script setup>
+import SiteHeader from "@/components/SiteHeader.vue";
 
-export default {
-  name: "Error",
-  components: {SiteHeader},
-  props: {
-    error: String,
-    callToAction: String
-  }
-}
+const props = defineProps({
+  error: String,
+  callToAction: String
+})
+
+defineExpose(props)
+
 </script>
 
 <style scoped>

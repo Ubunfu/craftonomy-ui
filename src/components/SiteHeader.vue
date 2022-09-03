@@ -15,31 +15,22 @@
   </div>
 </template>
 
-<script>
-import AuthTile from "../components/AuthTile.vue";
-import AuthTileDrawer from "../components/AuthTileDrawer.vue";
-import {useWindowWidthStore} from "../store/index";
+<script setup>
+import {computed} from "vue";
+import AuthTile from "@/components/AuthTile.vue";
+import AuthTileDrawer from "@/components/AuthTileDrawer.vue";
+import {useWindowWidthStore} from "../store";
 
-export default {
-  name: 'SiteHeader',
-  setup() {
-    const store = useWindowWidthStore();
-    return {store}
-  },
-  components: {
-    AuthTileDrawer,
-    AuthTile
-  },
-  props: {
-    isAuthenticated: Boolean,
-    idToken: String
-  },
-  computed: {
-    windowWidth() {
-      return this.store.getWindowWidth;
-    }
-  }
-}
+const store = useWindowWidthStore();
+const props = defineProps({
+  isAuthenticated: Boolean,
+  idToken: String
+});
+
+const windowWidth = computed(() => store.getWindowWidth)
+
+defineExpose(props)
+
 </script>
 
 <style scoped>

@@ -11,32 +11,26 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import jwtDecode from "jwt-decode";
+import {computed} from "vue";
 
-export default {
-  name: "AuthTileDrawer",
-  props: {
-    isAuthenticated: Boolean,
-    idToken: String
-  },
-  data() {
-    return {
-      idpLoginURL: `${import.meta.env.VITE_IDP_LOGIN_URI}?response_type=code&client_id=${import.meta.env.VITE_IDP_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_IDP_REDIRECT_URI}`,
-    }
-  },
-  computed: {
-    username() {
-      return jwtDecode(this.idToken)['cognito:username']
-    },
-  },
-  methods: {
-    logOut() {
-      this.$cookies.remove('authn')
-      this.$router.push({name: 'Home'})
-    }
-  }
+const props = defineProps({
+  isAuthenticated: Boolean,
+  idToken: String
+})
+
+const idpLoginURL = `${import.meta.env.VITE_IDP_LOGIN_URI}?response_type=code&client_id=${import.meta.env.VITE_IDP_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_IDP_REDIRECT_URI}`
+
+const username = computed(() => jwtDecode(props.idToken)['cognito:username'])
+
+function logOut() {
+  $cookies.remove('authn')
+  $router.push({name: 'Home'})
 }
+
+defineExpose(props)
+
 </script>
 
 <style scoped>

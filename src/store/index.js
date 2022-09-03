@@ -9,7 +9,7 @@ export const useWindowWidthStore = defineStore('windowWidth', {
     },
     actions: {
         setWindowWidth() {
-            this.state.windowWidth = window.innerWidth;
+            this.windowWidth = window.innerWidth;
         }
     }
 })

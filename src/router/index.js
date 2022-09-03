@@ -4,7 +4,6 @@ import {isAuthenticated} from "../services/securityService";
 import Home from "../components/Home.vue";
 import Authorize from "../components/Authorize.vue";
 import Error from "../components/Error.vue";
-import Secret from "../components/Secret.vue";
 import ShopHome from "../components/shop/ShopHome.vue";
 import ShopAddItem from "../components/shop/ShopAddItem/ShopAddItem.vue";
 
@@ -39,14 +38,6 @@ const routes = [
             isAuthenticated: route.params.isAuthenticated,
             idToken: route.params.idToken
         })
-    },
-    {
-        path: "/secret",
-        name: "Secret",
-        component: Secret,
-        meta: {
-            requiresAuth: true
-        }
     },
     {
         path: "/authorize",

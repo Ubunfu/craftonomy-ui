@@ -6,20 +6,19 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "HomeTile",
-  props: {
-    title: String,
-    description: String,
-    image: String
-  },
-  computed: {
-    imagePath() {
-      return "../src/assets/" + this.image;
-    }
-  }
-}
+<script setup>
+import {computed} from "vue";
+
+const props = defineProps({
+  title: String,
+  description: String,
+  image: String
+})
+
+const imagePath = computed(() => "../src/assets/" + props.image)
+
+defineExpose(props)
+
 </script>
 
 <style scoped>

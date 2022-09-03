@@ -8,10 +8,8 @@
   <p><a href="https://textcraft.net/">Minecraft Font Text Generator</a></p>
 </template>
 
-<script>
-export default {
-  name: "Footer"
-}
+<script setup>
+
 </script>
 
 <style scoped>

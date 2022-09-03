@@ -6,6 +6,7 @@ import vue from "@vitejs/plugin-vue";
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [vue()],
+    // Fixes the "process not found" error
     define: {
         'process.env.NODE_ENV': '"production"'
     },
@@ -14,7 +15,6 @@ export default defineConfig({
     },
     resolve: {
         alias: {
-            // util: "util/",
             "@": fileURLToPath(new URL("./src", import.meta.url)),
         },
     },
