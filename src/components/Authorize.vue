@@ -6,16 +6,17 @@
 </template>
 
 <script setup>
-import {getToken} from "../services/securityService";
+import {getToken} from "@/services/securityService";
 import {useRoute} from 'vue-router'
-import SiteHeader from "../components/SiteHeader.vue";
+import router from "@/router";
+import SiteHeader from "@/components/SiteHeader.vue";
 
 let authorizationError, authorized = null
 
 async function authorize() {
   const authResp = await getAccessToken()
   setAuthCookie(authResp)
-  await $router.push({name: 'Home'})
+  await router.push({name: 'Home'})
 }
 
 async function getAccessToken() {

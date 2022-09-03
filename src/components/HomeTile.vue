@@ -7,15 +7,15 @@
 </template>
 
 <script setup>
-import {computed} from "vue";
-
 const props = defineProps({
   title: String,
   description: String,
   image: String
 })
 
-const imagePath = computed(() => "../src/assets/" + props.image)
+// Binding template <img> paths to normal string consts doesn't work
+// this workaround enables dynamic resolution, and doesn't break cache-busting
+const imagePath = new URL(`../assets/${props.image}`, import.meta.url).href;
 
 defineExpose(props)
 

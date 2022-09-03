@@ -1,7 +1,7 @@
 <template>
   <div class="auth-drawer-toggle">
     <picture>
-      <img src="../assets/hamburger.png" alt="">
+      <img :src="imgHamburger" alt="">
     </picture>
     <div class="drawer-content">
       <a v-if="!isAuthenticated" :href="idpLoginURL"><div class="drawer-item">LOG IN</div></a>
@@ -14,6 +14,9 @@
 <script setup>
 import jwtDecode from "jwt-decode";
 import {computed} from "vue";
+import router from "@/router";
+
+import imgHamburger from '@/assets/hamburger.png';
 
 const props = defineProps({
   isAuthenticated: Boolean,
@@ -26,7 +29,7 @@ const username = computed(() => jwtDecode(props.idToken)['cognito:username'])
 
 function logOut() {
   $cookies.remove('authn')
-  $router.push({name: 'Home'})
+  router.push({name: 'Home'})
 }
 
 defineExpose(props)
